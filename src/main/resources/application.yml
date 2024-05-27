@@ -13,6 +13,19 @@ spring:
     name: apigateway-service
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+        - name: GlobalFilter
+          args:
+            preLogger: true
+            postLogger: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allow-credentials: true
       routes:
         - id: hospital-service
           uri: http://localhost:9001/
@@ -20,6 +33,6 @@ spring:
             - Path=/hospital-service/**
 
         - id: user-service
-          uri: http://localhost:8082/
+          uri: http://localhost:9002/
           predicates:
             - Path=/user-service/**
