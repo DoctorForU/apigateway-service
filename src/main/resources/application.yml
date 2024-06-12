@@ -37,7 +37,13 @@ spring:
           predicates:
             - Path=/user-service/**
 
+        - id: reservation-service
+          uri: http://localhost:9003/
+          predicates:
+            - Path=/reservation-service/**
+
         - id: mypage-service
           uri: http://localhost:9005/
           predicates:
             - Path=/mypage-service/**
+
