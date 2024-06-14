@@ -49,12 +49,14 @@ spring:
         - id: reservation-service
           uri: http://localhost:9003/
           predicates:
-            - Path=/reservation-service/**
-
-
-
-# 모니터링
-management:
+            - Path=/reservation-service/*
+        
+        - id: mypage-service
+          uri: http://localhost:9005/
+          predicates:
+            - Path=/mypage-service/**
+            
+management: # 모니터링
   endpoints:
     web:
       base-path: /apigateway-service/actuator
@@ -67,3 +69,6 @@ management:
     metrics:
       export:
         enabled: true
+
+
+
