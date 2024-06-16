@@ -45,11 +45,25 @@ spring:
           uri: http://localhost:9002/
           predicates:
             - Path=/user-service/**
+            -
+        - id: hospital-service
+          uri: http://localhost:9001/
+          predicates:
+            - Path=/hospital-service/actuator/**
+            - Method=GET, POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            #- RewritePath=/hospital-service/(?<segment>.*), /$\{segment}
 
-        - id: reservation-service
+        - id: emergency-service
           uri: http://localhost:9003/
           predicates:
-            - Path=/reservation-service/*
+            - Path=/emergency-service/**
+
+        - id: reservation-service
+          uri: http://localhost:9004/
+          predicates:
+            - Path=/reservation-service/**
         
         - id: mypage-service
           uri: http://localhost:9005/
@@ -61,7 +75,7 @@ management: # 모니터링
     web:
       base-path: /apigateway-service/actuator
       exposure:
-        include: health, info, metrics, prometheus  # 노출할 Actuator 엔드포인트 목록
+        include: refresh, beans, httptrace, health, info, metrics, prometheus  # 노출할 Actuator 엔드포인트 목록
   endpoint:
     health:
       show-details: always  # 모든 세부사항을 항상 표시
