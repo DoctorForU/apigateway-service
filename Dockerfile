@@ -11,4 +11,4 @@ COPY . .
 RUN ./gradlew clean build -x test
 
 # JAR 파일 실행 설정
-ENTRYPOINT ["java", "-jar", "/app/build/libs/apigateway-service.jar"]
+ENTRYPOINT ["java", "-jar", "/usr/src/app/build/libs/service-discovery.jar"]
