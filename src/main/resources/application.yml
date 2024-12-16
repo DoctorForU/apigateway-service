@@ -6,7 +6,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_URI}
 
 spring:
   application:
@@ -28,12 +28,12 @@ spring:
             allow-credentials: true
       routes:
         - id: hospital-service
-          uri: http://localhost:9001/
+          uri: http://hospital-container:9001/
           predicates:
             - Path=/hospital-service/**
 
         - id: hospital-service
-          uri: http://localhost:9001/
+          uri: http://hospital-container:9001/
           predicates:
             - Path=/hospital-service/actuator/**
             - Method=GET, POST
@@ -42,24 +42,24 @@ spring:
             #- RewritePath=/hospital-service/(?<segment>.*), /$\{segment}
 
         - id: user-service
-          uri: http://localhost:9002/
+          uri: http://user-container:9002/
           predicates:
             - Path=/user-service/**
 
         - id: user-service
-          uri: http://localhost:9002/
+          uri: http://user-container:9002/
           predicates:
             - Path=/user-service/actuator/**
             - Method=GET, POST
 
 
         - id: emergency-service
-          uri: http://localhost:9003/
+          uri: http://emergency-container:9003/
           predicates:
             - Path=/emergency-service/**
 
         - id: emergency-service
-          uri: http://localhost:9003/
+          uri: http://emergency-container:9003/
           predicates:
             - Path=/emergency-service/actuator/**
             - Method=GET, POST
@@ -68,12 +68,12 @@ spring:
             #- RewritePath=/hospital-service/(?<segment>.*), /$\{segment}
 
         - id: reservation-service
-          uri: http://localhost:9004/
+          uri: http://reservation-container:9004/
           predicates:
             - Path=/reservation-service/**
 
         - id: reservation-service
-          uri: http://localhost:9004/
+          uri: http://reservation-container:9004/
           predicates:
             - Path=/reservation-service/actuator/**
             - Method=GET, POST
@@ -82,12 +82,12 @@ spring:
             #- RewritePath=/hospital-service/(?<segment>.*), /$\{segment}
         
         - id: mypage-service
-          uri: http://localhost:9005/
+          uri: http://mypage-container:9005/
           predicates:
             - Path=/mypage-service/**
 
         - id: mypage-service
-          uri: http://localhost:9005/
+          uri: http://mypage-container:9005/
           predicates:
             - Path=/mypage-service/actuator/**
             - Method=GET, POST
